@@ -10,6 +10,7 @@ from PIL import Image
 import dnnlib
 import dnnlib.tflib as tflib
 from pathlib import Path
+import time
 # use my copy of the blended model to save Doron's download bandwidth
 # get the original here https://mega.nz/folder/OtllzJwa#C947mCCdEfMCRTWnDcs4qw
 blended_url = "./models/ffhq-cartoon-blended-64.pkl" #"https://drive.google.com/uc?id=1H73TfV5gQ9ot7slSed_l-lim9X7pMRiU"
@@ -65,11 +66,14 @@ def toonify_fn():
     source_image_path: 源图像的位置
     :return: target_image_path 目标图像的位置
     """
+    start_time= time.time()
     # step 1: 找到人的头像
     align_image()
     # step 2: 找到把图片投影到StyleGAN2的空间
     find_latent_code()
-    # step 3: 使用blended的模型，利用latent code做图像生成
+    # step 3: 使用blended的模型，利用latent code做图像生成. QUESTION: how to get blended model?
     blend_latent_code_with_new_model()
+    end_time= time.time()
+    print("#toonify_fn.time spent:",(end_time- start_time)+"ms")
 
 toonify_fn()

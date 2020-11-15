@@ -74,6 +74,6 @@ def toonify_fn():
     # step 3: 使用blended的模型，利用latent code做图像生成. QUESTION: how to get blended model?
     blend_latent_code_with_new_model()
     end_time= time.time()
-    print("#toonify_fn.time spent:",(end_time- start_time)+"ms")
+    print("#toonify_fn.time spent:",str(end_time- start_time)+"ms")
 
 toonify_fn()
